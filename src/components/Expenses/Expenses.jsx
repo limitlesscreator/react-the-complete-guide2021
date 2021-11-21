@@ -4,13 +4,21 @@ import './Expenses.css'
 import {Card} from "../UI/Card";
 import {ExpenseFilter} from "./ExpenseFilter";
 
-export const Expenses = ({expenses},props) => {
+export const Expenses = (props) => {
+    const [filteredYear, setFilterYear] = useState('2020')
 
+    const filterChangeHandler = (selectedYear) => {
+        setFilterYear(selectedYear)
+        console.log(selectedYear)
+    }
     return (
             <Card className={'expenses'}>
-                <ExpenseFilter dropdownChangeHandler={props.dropdownChangeHandler} selected={props.selected}/>
-                <ExpenseItem title={expenses[0].title} amount={expenses[0].amount} date={expenses[0].date}></ExpenseItem>
-                <ExpenseItem title={expenses[1].title} amount={expenses[1].amount} date={expenses[1].date}></ExpenseItem>
+                <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangeHandler}/>
+                {props.items.map(el => {
+                    return (
+                        <ExpenseItem title={el.title} amount={el.amount} date={el.date}/>
+                    )
+                })}
             </Card>
     );
 };

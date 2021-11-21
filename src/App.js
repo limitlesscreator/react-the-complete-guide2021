@@ -4,10 +4,7 @@ import {NewExpense} from "./components/NewExpense/NewExpense";
 import {useState} from "react";
 
 function App() {
-    let [selected,setSelected] = useState(2020)
-
-
-    const expenses = [
+    const [expenses, setExpenses] = useState([
         {
             id: 'el1',
             title: 'Car Insurance',
@@ -20,29 +17,25 @@ function App() {
             amount: 799.49,
             date: new Date(2020, 2, 12),
         },
-    ]
+    ])
 
     const saveExpenseDataHandler = (enteredExpenseData) => {
         const expenseData = {
             ...enteredExpenseData,
             id: Math.random().toString()
         }
+
         console.log(expenseData)
-        console.log(selected)
-
+        setExpenses(prevExpenses => {
+            return [expenseData,...prevExpenses]
+        })
     }
-
-
-    const dropdownChangeHandler = (event) => {
-        setSelected(event.currentTarget.value)
-        console.log('It\'s work!')
-    };
 
     return (
         <div className="App">
             <NewExpense saveExpenseDataHandler={saveExpenseDataHandler}/>
             <div>
-                <Expenses expenses={expenses} selected={selected} dropdownChangeHandler={dropdownChangeHandler}/>
+                <Expenses items={expenses} />
             </div>
         </div>
     );
