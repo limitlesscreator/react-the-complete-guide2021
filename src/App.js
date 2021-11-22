@@ -17,6 +17,18 @@ function App() {
             amount: 799.49,
             date: new Date(2020, 2, 12),
         },
+        {
+            id: 'el3',
+            title: 'MacBook',
+            amount: 2400.49,
+            date: new Date(2021, 11, 30),
+        },
+        {
+            id: 'el4',
+            title: 'Tesla Model 3',
+            amount: 35000,
+            date: new Date(2022, 11, 30),
+        },
     ])
 
     const saveExpenseDataHandler = (enteredExpenseData) => {
